@@ -72,6 +72,7 @@
     }
 
     state.store = window.Store.create();
+    if (window.Home) window.Home.init(state.store);
     state.calY = td.getFullYear();
     state.calM = td.getMonth();
 
@@ -162,11 +163,11 @@
 
   function route() {
     var v = (location.hash || '#today').replace('#', '') || 'today';
-    if (['today', 'calendar', 'album', 'add'].indexOf(v) < 0) v = 'today';
+    if (['today', 'calendar', 'album', 'home', 'add'].indexOf(v) < 0) v = 'today';
     if (state.view === v && v !== 'add') { /* 仍重绘，保证数据最新 */ }
     state.view = v;
 
-    ['today', 'calendar', 'album', 'add'].forEach(function (name) {
+    ['today', 'calendar', 'album', 'home', 'add'].forEach(function (name) {
       var el = $('#view-' + name);
       if (!el) return;
       el.hidden = name !== v;
@@ -178,6 +179,7 @@
     if (v === 'today') { renderToday(); }
     if (v === 'calendar') { renderCalendar(); }
     if (v === 'album') { renderAlbum(); }
+    if (v === 'home' && window.Home) { window.Home.enter(); }
     window.scrollTo({ top: 0, behavior: 'auto' });
   }
 
