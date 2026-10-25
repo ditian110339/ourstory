@@ -18,7 +18,7 @@
 
   /* 网络不稳的时候自动重试几次 */
   async function req(url, opts, tries) {
-    tries = tries || 3;
+    tries = tries || 4;
     var lastErr;
     for (var i = 0; i < tries; i++) {
       try {
@@ -52,7 +52,13 @@
   }
 
   async function compress(file) {
-    var bmp = await loadBitmap(file);
+    var bmp;
+    try {
+      bmp = await loadBitmap(file);
+    } catch (e) {
+      // 这个浏览器解不了这张图（比如某些 HEIC），原样上传，至少不会丢
+      return { blob: file, w: 0, h: 0 };
+    }
     var w = bmp.width, h = bmp.height;
     var scale = Math.min(1, MAX_EDGE / Math.max(w, h));
     var tw = Math.max(1, Math.round(w * scale));
