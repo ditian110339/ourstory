@@ -83,10 +83,139 @@
     <!-- 回忆录 -->
     <section class="view" id="view-album" data-view="album" hidden>
       <div class="album-head">
-        <h2 class="album-title">回忆录</h2>
+        <div class="album-headrow">
+          <h2 class="album-title">回忆录</h2>
+          <a class="album-add" href="#add" aria-label="添一条">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </a>
+        </div>
         <p class="album-stats" id="album-stats"></p>
       </div>
       <div id="album-list"></div>
+    </section>
+
+    <!-- 家 -->
+    <section class="view" id="view-home" data-view="home" hidden>
+      <div class="room-wrap">
+        <div class="bubble" id="pet-bubble" hidden><span id="pet-bubble-text"></span></div>
+
+        <svg class="room" viewBox="0 0 360 300" aria-hidden="true">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#CFE0E6"/>
+              <stop offset="1" stop-color="#EBD9C4"/>
+            </linearGradient>
+            <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F6EEE4"/>
+              <stop offset="1" stop-color="#F0E5D8"/>
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="360" height="250" fill="url(#wallG)"/>
+          <rect x="0" y="250" width="360" height="50" fill="#EADFCF"/>
+          <line x1="0" y1="250" x2="360" y2="250" stroke="#DCCEB9" stroke-width="1"/>
+
+          <!-- 窗 -->
+          <rect x="34" y="42" width="98" height="88" rx="3" fill="url(#sky)" id="pet-window"/>
+          <g id="pet-night" opacity="0">
+            <circle cx="106" cy="64" r="8.5" fill="#F3E6C8"/>
+            <circle cx="52" cy="58" r="1.3" fill="#F3E6C8" opacity=".85"/>
+            <circle cx="66" cy="72" r="1" fill="#F3E6C8" opacity=".7"/>
+            <circle cx="90" cy="55" r=".9" fill="#F3E6C8" opacity=".6"/>
+            <circle cx="58" cy="104" r="1.1" fill="#F3E6C8" opacity=".55"/>
+          </g>
+          <rect x="34" y="42" width="98" height="88" rx="3" fill="none" stroke="#C9B8A2" stroke-width="2"/>
+          <line x1="83" y1="42" x2="83" y2="130" stroke="#C9B8A2" stroke-width="2"/>
+          <line x1="34" y1="86" x2="132" y2="86" stroke="#C9B8A2" stroke-width="2"/>
+          <rect x="26" y="130" width="114" height="6" rx="2" fill="#DCCEB9"/>
+
+          <!-- 架子 + 两幅小像 -->
+          <line x1="228" y1="112" x2="336" y2="112" stroke="#C9B8A2" stroke-width="3" stroke-linecap="round"/>
+          <g id="frame-a">
+            <rect x="238" y="70" width="34" height="42" rx="2" fill="#FFFDF9" stroke="#D9C9B4" stroke-width="1.5"/>
+            <circle cx="255" cy="86" r="7" fill="#DCC7B4"/>
+            <path d="M244 108c2-9 7-13 11-13s9 4 11 13z" fill="#DCC7B4"/>
+          </g>
+          <g id="frame-b">
+            <rect x="288" y="70" width="34" height="42" rx="2" fill="#FFFDF9" stroke="#D9C9B4" stroke-width="1.5"/>
+            <circle cx="305" cy="86" r="7" fill="#DCC7B4"/>
+            <path d="M294 108c2-9 7-13 11-13s9 4 11 13z" fill="#DCC7B4"/>
+          </g>
+
+          <!-- 地毯 -->
+          <ellipse cx="180" cy="284" rx="96" ry="18" fill="#E7D2C6" opacity=".45"/>
+
+          <!-- 饭盆 -->
+          <g id="pet-bowl">
+            <ellipse cx="256" cy="276" rx="22" ry="7" fill="#D9C9B4"/>
+            <path d="M234 275q22 14 44 0z" fill="#C9B8A2"/>
+            <ellipse cx="256" cy="275" rx="22" ry="6.5" fill="#EFE4D3"/>
+            <ellipse id="pet-food" cx="256" cy="274" rx="15" ry="4.5" fill="#B5895F" opacity="0"/>
+          </g>
+
+          <!-- 猫 -->
+          <ellipse cx="180" cy="289" rx="48" ry="7" fill="#000" opacity=".05"/>
+          <g id="pet-cat" class="pet-cat">
+            <g class="pet-tail">
+              <path d="M206 272C232 268 242 246 231 234" fill="none" stroke="#C2AC92" stroke-width="9" stroke-linecap="round"/>
+            </g>
+            <path d="M151 288c-5-29 7-51 29-51s34 22 29 51z" fill="#C9B7A0"/>
+            <path d="M180 243c7 5 11 13 11 20 0 8-5 13-11 15-6-2-11-7-11-15 0-7 4-15 11-20z" fill="#E4D6C3" opacity=".7"/>
+            <g class="pet-head">
+              <path d="M158 198l6-24 14 16z" fill="#C9B7A0"/>
+              <path d="M202 198l-6-24-14 16z" fill="#C9B7A0"/>
+              <path d="M162 197l3.6-14 8.4 9.6z" fill="#E0B4A8" opacity=".9"/>
+              <path d="M198 197l-3.6-14-8.4 9.6z" fill="#E0B4A8" opacity=".9"/>
+              <circle cx="180" cy="214" r="27" fill="#C9B7A0"/>
+              <ellipse cx="164" cy="223" rx="6" ry="3.4" fill="#DFAE9F" opacity=".42"/>
+              <ellipse cx="196" cy="223" rx="6" ry="3.4" fill="#DFAE9F" opacity=".42"/>
+              <g class="pet-eyes">
+                <ellipse cx="171" cy="212" rx="2.4" ry="3.2" fill="#3D342C"/>
+                <ellipse cx="189" cy="212" rx="2.4" ry="3.2" fill="#3D342C"/>
+              </g>
+              <path d="M177 220h6l-3 3z" fill="#A97F6B"/>
+              <path d="M180 223v4" stroke="#A97F6B" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M168 224l-12-2M168 228l-12 2" stroke="#C0AF99" stroke-width="1.1" stroke-linecap="round"/>
+              <path d="M192 224l12-2M192 228l12 2" stroke="#C0AF99" stroke-width="1.1" stroke-linecap="round"/>
+            </g>
+            <ellipse cx="167" cy="288" rx="8" ry="4" fill="#BFA98F"/>
+            <ellipse cx="193" cy="288" rx="8" ry="4" fill="#BFA98F"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="pet-strip">
+        <button class="feed-btn" id="feed-btn" type="button">喂它</button>
+        <div class="pet-status" id="pet-status"></div>
+      </div>
+
+      <form class="pet-form" id="pet-form">
+        <input class="pet-input" id="pet-input" placeholder="跟它说句话…" maxlength="60" autocomplete="off">
+        <button class="pet-send" type="submit">说</button>
+      </form>
+
+      <p class="pet-note">你喂过的每一次、说过的每一句话，它都记着。</p>
+
+      <div class="who" id="who" hidden>
+        <p class="who-q">你是哪一个？</p>
+        <div class="who-row">
+          <button class="who-btn" type="button" data-who="a">
+            <svg viewBox="0 0 60 90">
+              <circle cx="30" cy="22" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 88c0-22 10-34 22-34s22 12 22 34" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <span>短发</span>
+          </button>
+          <button class="who-btn" type="button" data-who="b">
+            <svg viewBox="0 0 60 90">
+              <circle cx="30" cy="22" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M17 20c0-10 6-14 13-14s13 4 13 14" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 88c0-24 8-34 18-34s18 10 18 34" fill="none" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <span>长发</span>
+          </button>
+        </div>
+      </div>
     </section>
 
     <!-- 添加 -->
@@ -143,9 +272,9 @@
       <svg viewBox="0 0 24 24"><rect x="3.5" y="7" width="14" height="12" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 4.5h11.5a2 2 0 0 1 2 2V16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       <span>回忆录</span>
     </a>
-    <a class="tab" href="#add" data-tab="add">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v8M8 12h8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <span>添一条</span>
+    <a class="tab" href="#home" data-tab="home">
+      <svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.5V20h11v-9.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>家</span>
     </a>
   </nav>
 
@@ -160,6 +289,7 @@
 
 <script src="config.js"></script>
 <script src="store.js"></script>
+<script src="home.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
