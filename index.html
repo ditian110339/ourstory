@@ -96,8 +96,8 @@
         <p class="add-sub">那天的照片，那天的我们</p>
       </div>
 
-      <label class="picker" id="picker">
-        <input id="file-input" type="file" accept="image/*" multiple hidden>
+      <div class="picker" id="picker" role="button" tabindex="0">
+        <input id="file-input" type="file" accept="image/*" multiple>
         <svg class="picker-icon" viewBox="0 0 48 48" aria-hidden="true">
           <rect x="7" y="11" width="34" height="26" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
           <circle cx="17" cy="20" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
@@ -105,7 +105,7 @@
         </svg>
         <span class="picker-main">选照片</span>
         <span class="picker-sub">可以从相册选，也能直接拍</span>
-      </label>
+      </div>
 
       <div class="draft" id="draft" hidden>
         <div class="draft-thumbs" id="draft-thumbs"></div>
