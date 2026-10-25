@@ -391,6 +391,16 @@ body::after{
 
 /* ── 回忆录 ───────────────────────────────────────────────── */
 .album-head{padding:38px 0 26px}
+.album-headrow{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.album-add{
+  width:36px;height:36px;flex:0 0 auto;
+  display:grid;place-items:center;
+  color:var(--ink-soft);text-decoration:none;
+  border:1px solid var(--line);border-radius:50%;
+  transition:background .25s,color .25s;
+}
+.album-add:active{background:var(--paper-deep);color:var(--ink)}
+.album-add svg{width:18px;height:18px}
 .album-title{
   margin:0;
   font-family:var(--serif);font-size:24px;font-weight:400;
@@ -413,6 +423,134 @@ body::after{
 .album-month::after{
   content:"";flex:1;height:1px;background:var(--line-soft);
 }
+
+/* ── 家 ───────────────────────────────────────────────────── */
+.room-wrap{
+  position:relative;
+  margin:34px 0 0;
+  border-radius:6px;
+  overflow:hidden;
+  box-shadow:0 1px 2px rgba(42,36,32,.05),0 18px 40px -24px rgba(42,36,32,.5);
+  background:#F6EEE4;
+  animation:rise .7s cubic-bezier(.2,.8,.25,1) both;
+}
+.room{display:block;width:100%;height:auto}
+
+.pet-tail{transform-box:fill-box;transform-origin:0% 100%;animation:tailSway 4.6s ease-in-out infinite}
+.pet-head{transform-box:fill-box;transform-origin:center bottom;animation:bob 7s ease-in-out infinite}
+.pet-eyes{transform-box:fill-box;transform-origin:center;animation:blink 7.5s infinite}
+.pet-cat.happy{animation:hop .75s cubic-bezier(.3,1.6,.5,1)}
+
+@keyframes tailSway{0%,100%{transform:rotate(0)}50%{transform:rotate(-8deg)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}95%,97%{transform:scaleY(.06)}}
+@keyframes hop{
+  0%{transform:translateY(0)}
+  35%{transform:translateY(-14px)}
+  60%{transform:translateY(0)}
+  78%{transform:translateY(-5px)}
+  100%{transform:translateY(0)}
+}
+
+.bubble{
+  position:absolute;
+  left:50%;top:16%;
+  transform:translateX(-50%);
+  max-width:66%;
+  padding:10px 14px;
+  font-family:var(--serif);
+  font-size:13px;line-height:1.8;
+  color:var(--ink);
+  background:rgba(255,253,249,.97);
+  border:1px solid var(--line);
+  border-radius:10px;
+  box-shadow:0 8px 20px -12px rgba(42,36,32,.5);
+  animation:pop .4s cubic-bezier(.2,1.4,.4,1) both;
+  z-index:2;
+}
+.bubble[hidden]{display:none}
+.bubble::after{
+  content:"";position:absolute;
+  left:50%;bottom:-7px;width:12px;height:12px;
+  transform:translateX(-50%) rotate(45deg);
+  background:rgba(255,253,249,.97);
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+@keyframes pop{from{opacity:0;transform:translateX(-50%) translateY(6px) scale(.94)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+
+.pet-strip{
+  display:flex;align-items:center;gap:14px;
+  margin-top:20px;
+}
+.feed-btn{
+  flex:0 0 auto;
+  padding:12px 24px;
+  font-family:var(--sans);font-size:13px;letter-spacing:.14em;text-indent:.14em;
+  color:var(--paper);background:var(--ink);
+  border:0;border-radius:999px;cursor:pointer;
+  transition:opacity .25s,transform .2s,background .25s;
+}
+.feed-btn:active{transform:scale(.97)}
+.feed-btn:disabled{background:var(--ink-faint);opacity:.55}
+.pet-status{
+  font-size:12px;line-height:1.7;letter-spacing:.04em;
+  color:var(--ink-soft);
+}
+
+.pet-form{
+  display:flex;align-items:center;gap:10px;
+  margin-top:18px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--line);
+}
+.pet-input{
+  flex:1;min-width:0;
+  padding:8px 0;
+  font-family:var(--serif);font-size:15px;
+  color:var(--ink);background:transparent;border:0;outline:none;
+}
+.pet-input::placeholder{color:var(--ink-faint);font-size:14px}
+.pet-send{
+  flex:0 0 auto;
+  padding:7px 16px;
+  font-family:var(--sans);font-size:12.5px;letter-spacing:.1em;
+  color:var(--ink);background:transparent;
+  border:1px solid var(--line);border-radius:999px;cursor:pointer;
+  transition:background .25s;
+}
+.pet-send:active{background:var(--paper-deep)}
+.pet-note{
+  margin:26px 0 0;
+  text-align:center;
+  font-size:11.5px;letter-spacing:.1em;
+  color:var(--ink-faint);
+}
+
+.who{
+  position:absolute;inset:0;z-index:5;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  padding:24px;
+  background:rgba(250,246,239,.97);
+  border-radius:6px;
+}
+.who[hidden]{display:none}
+.who-q{
+  margin:0;
+  font-family:var(--serif);font-size:16px;letter-spacing:.1em;
+  color:var(--ink);
+}
+.who-row{display:flex;gap:26px}
+.who-btn{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:14px 18px;
+  color:var(--ink-soft);background:transparent;
+  border:1px solid var(--line);border-radius:6px;cursor:pointer;
+  transition:color .25s,border-color .25s,background .25s;
+}
+.who-btn:active{color:var(--accent);border-color:var(--accent-soft);background:var(--card)}
+.who-btn svg{width:40px;height:60px}
+.who-btn span{font-size:12px;letter-spacing:.12em}
 
 /* ── 添加 ─────────────────────────────────────────────────── */
 .add-head{padding:38px 0 24px}
