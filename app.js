@@ -512,6 +512,10 @@
     var draftEl = $('#draft');
 
     if (!input.dataset.bound) {
+      $('#picker').addEventListener('click', function (e) {
+        if (e.target === input) return;
+        input.click();
+      });
       input.addEventListener('change', async function () {
         var files = Array.prototype.slice.call(input.files || []);
         if (!files.length) return;
@@ -635,7 +639,14 @@
       location.hash = '#album';
     } catch (e) {
       console.error(e);
-      st.textContent = e.message || '没存上，再试一次';
+      var msg = String(e.message || e);
+      if (/fetch|network|load failed/i.test(msg)) {
+        st.textContent = '网络没连上。照片还在这儿，再点一次「存进回忆录」就行。';
+      } else if (/口令|401|403/.test(msg)) {
+        st.textContent = '登录过期了，关掉重开一次再试。';
+      } else {
+        st.textContent = '没存上：' + msg.slice(0, 60);
+      }
       st.classList.add('err');
     } finally {
       btn.disabled = false;
